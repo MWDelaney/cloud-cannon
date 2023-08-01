@@ -58,6 +58,10 @@ const htmlmin = require("html-minifier");
  * https://www.11ty.dev/docs/config/
  */
 module.exports = function (eleventyConfig) {
+  
+      eleventyConfig.addCollection("pages", function(collectionApi) {
+      return collectionApi.getFilteredByGlob("src/content/pages/*.njk");
+    });
 
   /**
    * Start pretty console output
