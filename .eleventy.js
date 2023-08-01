@@ -58,11 +58,6 @@ const htmlmin = require("html-minifier");
  * https://www.11ty.dev/docs/config/
  */
 module.exports = function (eleventyConfig) {
-  
-      eleventyConfig.addCollection("pages", function(collectionApi) {
-      return collectionApi.getFilteredByGlob("src/content/pages/*.njk");
-    });
-
   /**
    * Start pretty console output
    */
@@ -78,17 +73,6 @@ module.exports = function (eleventyConfig) {
     chalk.yellow("📚 Collections ") +
     chalk.gray("(/src/config/collections.js)")
   );
-
-  Object.keys(collections).forEach((collectionName, index) => {
-    let len = Object.keys(collections).length - 1;
-    let pre = (index === len ? "└── " : "├── ");
-    console.log(
-      chalk.white("│       " + pre) +
-      chalk.green(collectionName)
-    );
-
-    collections[collectionName](eleventyConfig);
-  });
 
   console.groupEnd();
   console.log(chalk.white("  |"));
@@ -190,6 +174,10 @@ module.exports = function (eleventyConfig) {
 
     return content;
   });
+  
+    eleventyConfig.addCollection("pages", function(collectionApi) {
+      return collectionApi.getFilteredByGlob("src/content/pages/*.njk");
+    });
 
   /**
    * Minify XML output
